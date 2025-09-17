@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -11,9 +12,19 @@ public class Main {
         String input = scanner.nextLine();
         if (input.equals("exit 0")){
             status = false;
+            System.exit(0);
         }
         else {
-            System.out.println(input + ": command not found");
+            String[] commands =  input.split(" ",2);
+            String command = commands[0];
+            String argument = commands.length > 1 ? commands[1] : "";
+
+            if(command.equals("echo")){
+                System.out.println(argument);
+            }
+            else {
+                System.out.println(input + ": command not found");
+            }
         }
 
         }
