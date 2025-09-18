@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -6,10 +7,10 @@ public class Main {
     public static void main(String[] args) throws Exception {
         // Uncomment this block to pass the first stage
         boolean status = true;
+        Scanner scanner = new Scanner(System.in);
         while(status){
          System.out.print("$ ");
 
-        Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         if (input.equals("exit 0")){
             handleExit();
@@ -31,16 +32,35 @@ public class Main {
         }
 
         }
-
+        scanner.close();
     }
+
+
+
+
+
 
     private static void handleType(String argument) {
         PreDefinedCommands preDefinedCommands = PreDefinedCommands.fromString(argument);
+        String path_commands = System.getenv("PATH");
+        String[] path_command = path_commands.split(":");
+
         if(preDefinedCommands != null){
             System.out.println(argument + " is a shell builtin");
         }
         else{
-            System.out.println(argument + ": not found");
+            boolean fileExists = false;
+            for(String command : path_command){
+                File file = new File(command,argument);
+                if(file.exists()){
+                    fileExists = true;
+                    System.out.println(argument + " is "+file.getAbsolutePath());
+                }
+            }
+            if(!fileExists){
+                System.out.println(argument + ": not found");
+
+            }
         }
     }
 
