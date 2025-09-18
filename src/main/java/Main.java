@@ -52,7 +52,7 @@ public class Main {
             boolean fileExists = false;
             for(String command : path_command){
                 File file = new File(command,argument);
-                if(file.exists()){
+                if(file.exists() && file.canExecute()){
                     fileExists = true;
                     System.out.println(argument + " is "+file.getAbsolutePath());
                 }
