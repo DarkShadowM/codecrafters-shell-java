@@ -1,7 +1,8 @@
 public enum PreDefinedCommands {
     EXIT_0("exit"),
     ECHO("echo"),
-    TYPE("type"),;
+    TYPE("type"),
+    PWD("pwd");
 
     private String value;
     PreDefinedCommands(String s) {

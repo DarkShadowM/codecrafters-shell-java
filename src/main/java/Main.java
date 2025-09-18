@@ -29,6 +29,10 @@ public class Main {
             else if(input.startsWith(PreDefinedCommands.TYPE.getValue())){
                 handleType(argument);
             }
+            else if("pwd".equals(PreDefinedCommands.PWD.getValue())){
+                handlePwd();
+
+            }
             else {
                 handleRunProgram(command, argument);
 
@@ -37,6 +41,11 @@ public class Main {
 
         }
         scanner.close();
+    }
+
+    private static void handlePwd() throws IOException {
+        File file = new  File(".");
+        System.out.println(file.getCanonicalPath());
     }
 
     private static void handleRunProgram(String command, String argument) {
