@@ -43,7 +43,7 @@ public class Main {
     private static void handleType(String argument) {
         PreDefinedCommands preDefinedCommands = PreDefinedCommands.fromString(argument);
         String path_commands = System.getenv("PATH");
-        String[] path_command = path_commands.split(":");
+        String[] path_command = path_commands.split(File.pathSeparator);
 
         if(preDefinedCommands != null){
             System.out.println(argument + " is a shell builtin");
