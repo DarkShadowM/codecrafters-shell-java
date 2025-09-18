@@ -29,7 +29,7 @@ public class Main {
             else if(input.startsWith(PreDefinedCommands.TYPE.getValue())){
                 handleType(argument);
             }
-            else if("pwd".equals(PreDefinedCommands.PWD.getValue())){
+            else if(command.equals(PreDefinedCommands.PWD.getValue())){
                 handlePwd();
 
             }
