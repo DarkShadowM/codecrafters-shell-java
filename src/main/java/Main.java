@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,6 +35,9 @@ public class Main {
                 handlePwd();
 
             }
+            else if(command.equals(PreDefinedCommands.CD.getValue())){
+                handleCD(argument);
+            }
             else {
                 handleRunProgram(command, argument);
 
@@ -41,6 +46,27 @@ public class Main {
 
         }
         scanner.close();
+    }
+
+    private static void handleCD(String pathArg) {
+
+            Path path = Paths.get(pathArg);
+            if(!path.isAbsolute()){
+                System.out.println("cd: " + pathArg + ": is not an absolute path");
+                return;
+            }
+            File file = new  File(pathArg);
+            if(!file.exists()){
+                System.out.println("cd: " + pathArg + ": No such file or directory");
+                return;
+            }
+            if(!file.isDirectory()){
+                System.out.println("cd: " + pathArg + ": No such file or directory");
+                return;
+            }
+
+        System.setProperty("user.dir", path.toString());
+
     }
 
     private static void handlePwd() throws IOException {

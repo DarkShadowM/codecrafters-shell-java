@@ -2,9 +2,10 @@ public enum PreDefinedCommands {
     EXIT_0("exit"),
     ECHO("echo"),
     TYPE("type"),
-    PWD("pwd");
+    PWD("pwd"),
+    CD("cd");
 
-    private String value;
+    private final String value;
     PreDefinedCommands(String s) {
         this.value = s;
     }
