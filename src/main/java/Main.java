@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 public class Main {
 
+    private static File currentDirectory = new File(System.getProperty("user.dir"));
+
     public static void main(String[] args) throws Exception {
         // Uncomment this block to pass the first stage
         boolean status = true;
@@ -65,13 +67,12 @@ public class Main {
                 return;
             }
 
-        System.setProperty("user.dir", path.toString());
+        currentDirectory = file;
 
     }
 
     private static void handlePwd() throws IOException {
-        File file = new  File(".");
-        System.out.println(file.getCanonicalPath());
+        System.out.println(currentDirectory.getCanonicalPath());
     }
 
     private static void handleRunProgram(String command, String argument) {
@@ -80,6 +81,7 @@ public class Main {
         commands.add(command);
         commands.addAll(Arrays.asList(argument.split(" ")));
         ProcessBuilder pb = new ProcessBuilder(commands);
+            pb.directory(currentDirectory);
             pb.inheritIO(); // inherit stdin, stdout, stderr
             Process proc = pb.start();
             proc.waitFor();
